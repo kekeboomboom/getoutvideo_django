@@ -13,3 +13,5 @@ django-allauth[mfa]==65.10.0  # https://github.com/pennersr/django-allauth
 django-crispy-forms==2.4  # https://github.com/django-crispy-forms/django-crispy-forms
 crispy-bootstrap5==2025.6  # https://github.com/django-crispy-forms/crispy-bootstrap5
 django-redis==6.0.0  # https://github.com/jazzband/django-redis
+djangorestframework==3.15.2  # https://github.com/encode/django-rest-framework
+getoutvideo==1.1.1  # https://pypi.org/project/getoutvideo/

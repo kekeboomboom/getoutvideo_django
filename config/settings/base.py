@@ -79,6 +79,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     "crispy_forms",
     "crispy_bootstrap5",
+    "rest_framework",
     "allauth",
     "allauth.account",
     "allauth.mfa",
@@ -87,6 +88,7 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "getoutvideo_django.users",
+    "getoutvideo_django.video_processor",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -282,6 +284,37 @@ ACCOUNT_FORMS = {"signup": "getoutvideo_django.users.forms.UserSignupForm"}
 SOCIALACCOUNT_ADAPTER = "getoutvideo_django.users.adapters.SocialAccountAdapter"
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
 SOCIALACCOUNT_FORMS = {"signup": "getoutvideo_django.users.forms.UserSocialSignupForm"}
+
+# django-rest-framework
+# ------------------------------------------------------------------------------
+# https://www.django-rest-framework.org/api-guide/settings/
+REST_FRAMEWORK = {
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+    "DEFAULT_THROTTLE_CLASSES": [
+        "rest_framework.throttling.AnonRateThrottle",
+        "rest_framework.throttling.UserRateThrottle",
+    ],
+    "DEFAULT_THROTTLE_RATES": {
+        "anon": "100/day",
+        "user": "1000/day",
+    },
+    "DEFAULT_RENDERER_CLASSES": [
+        "rest_framework.renderers.JSONRenderer",
+    ],
+    "DEFAULT_PARSER_CLASSES": [
+        "rest_framework.parsers.JSONParser",
+        "rest_framework.parsers.MultiPartParser",
+    ],
+    "EXCEPTION_HANDLER": "getoutvideo_django.video_processor.exceptions.custom_exception_handler",
+}
+
+# GetOutVideo Configuration
+# ------------------------------------------------------------------------------
+GETOUTVIDEO_CONFIG = {
+    "OPENAI_API_KEY": env.str("OPENAI_API_KEY", default=""),
+}
 
 
 # Your stuff...

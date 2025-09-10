@@ -19,6 +19,10 @@ urlpatterns = [
     path("users/", include("getoutvideo_django.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
+    path(
+        "",
+        include("getoutvideo_django.video_processor.urls", namespace="video_processor"),
+    ),
     # ...
     # Media files
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
